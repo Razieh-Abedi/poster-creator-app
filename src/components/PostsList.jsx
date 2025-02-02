@@ -1,9 +1,28 @@
+import {useState} from 'react';
+
 import styles from './PostsList.module.css';
 import Post from './Post';
+import NewPost from './NewPost';
 function PostsList() {
-    return <ul className={styles.posts}>
-       <Post name="Razi" text="this is post 1"/>
+const [enteredText, setEnteredText] = useState('');
+const [enteredName, setEnteredName] = useState('')
+
+function changeBodyHandler(event) {
+    setEnteredText(event.target.value);
+}
+
+function changeAuthorHandler(event) {
+    setEnteredName(event.target.value);
+}
+
+
+    return <>
+    <NewPost changeBodyHandler={changeBodyHandler} changeAuthorHandler={changeAuthorHandler}/>
+    <ul className={styles.posts}>
+       <Post name={enteredName} text={enteredText}/>
        <Post name="Razi2" text="this i post2"/>
     </ul>
+    </>
+    
 }
 export default PostsList;
